@@ -20,7 +20,24 @@ FS Snapshot does exactly that. It will produce an object that can be saved to ho
 
 ### Usage
 
-To generate a snapshot, use `snapshot.create(root)`. To compare two snapshots, use `snapshot.changed(snapshot1, snapshot2)`. Good times!
+To generate a snapshot, use `snapshot.create(root)`. To compare two snapshots, use `snapshot.changed(snapshot1, snapshot2)`. Snapshots are buffers containing zlib-compressed JSON objects. To compress or decompress manually, you can use `snapshot.compress(src)` and `snapshot.decompress(src)`.
+
+```js
+const snapshot = require('fs-snapshot')
+
+const snap1 = snapshot.create('./some_files')
+console.log(snapshot.decompress(snap1)) // check the output, if you want
+
+// wait a while, make some changes to some of the files
+
+const snap2 = snapshot.create('./some_files')
+
+// now we compare the two snapshots
+const changedFiles = snapshot.changed(snap1, snap2)
+
+// array of files that have changed between the first and second snapshots
+console.log(changedFiles)
+```
 
 ### License & Contributing
 

@@ -1,7 +1,7 @@
 {
   "name": "fs-snapshot",
   "description": "creates a snapshot of a directory which can be used to determine which files have changed",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Jeff Escalante",
   "ava": {
     "verbose": "true"

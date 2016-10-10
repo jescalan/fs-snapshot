@@ -25,18 +25,23 @@ To generate a snapshot, use `snapshot.create(root)`. To compare two snapshots, u
 ```js
 const snapshot = require('fs-snapshot')
 
-const snap1 = snapshot.create('./some_files')
-console.log(snapshot.decompress(snap1)) // check the output, if you want
+const snap1 = snapshot.create('./some_files').then(console.log)
+
+// check the output, if you want
+snap1.then((s) => {
+  console.log(snapshot.decompress(snap1))
+})
 
 // wait a while, make some changes to some of the files
 
 const snap2 = snapshot.create('./some_files')
 
 // now we compare the two snapshots
-const changedFiles = snapshot.changed(snap1, snap2)
-
-// array of files that have changed between the first and second snapshots
-console.log(changedFiles)
+Promise.all([snap1, snap2]).then(([s1, s2]) => {
+  // array of files that have changed between the first and second snapshots
+  const changedFiles = snapshot.changed(snap1, snap2)
+  console.log(changedFiles)
+})
 ```
 
 ### License & Contributing

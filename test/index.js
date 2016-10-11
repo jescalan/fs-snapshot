@@ -21,5 +21,5 @@ test('compare', (t) => {
     bar: 1468770187000
   }))
   t.truthy(changed.length === 1)
-  t.truthy(changed[0] === 'bar')
+  t.truthy(changed[0] === 'foo')
 })
